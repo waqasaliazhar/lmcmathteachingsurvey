@@ -41,7 +41,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Header ───────────────────────────── */
 .survey-header {
   background: var(--primary);
   padding: 32px 20px 26px;
@@ -73,14 +72,12 @@ body {
   position: relative;
 }
 
-/* ─── Container ────────────────────────── */
 .container {
   max-width: 640px;
   margin: 0 auto;
   padding: 20px 16px 60px;
 }
 
-/* ─── Progress ─────────────────────────── */
 .progress-wrap {
   display: flex;
   align-items: center;
@@ -107,7 +104,6 @@ body {
   white-space: nowrap;
 }
 
-/* ─── Card ─────────────────────────────── */
 .card {
   background: var(--card);
   border-radius: 14px;
@@ -134,7 +130,6 @@ body {
   padding: 22px 24px 28px;
 }
 
-/* ─── Preamble ─────────────────────────── */
 .preamble {
   background: var(--primary-faint);
   border-radius: 8px;
@@ -146,7 +141,6 @@ body {
   margin-bottom: 22px;
 }
 
-/* ─── Questions ────────────────────────── */
 .question-block { margin-bottom: 28px; }
 .question-block:last-child { margin-bottom: 0; }
 .q-label {
@@ -162,7 +156,6 @@ body {
   margin-bottom: 6px;
 }
 
-/* ─── Radio / Checkbox ─────────────────── */
 .option-list { display: flex; flex-direction: column; gap: 7px; margin-top: 6px; }
 .option-item {
   display: flex;
@@ -208,7 +201,6 @@ body {
   background: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
 }
 
-/* ─── Forced Pair ──────────────────────── */
 .pair-wrap { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
 .pair-option {
   display: flex;
@@ -226,7 +218,6 @@ body {
 .pair-option.selected { border-color: var(--focus); background: var(--selected-bg); }
 .pair-option .radio-dot { margin-top: 2px; }
 
-/* ─── Grid ─────────────────────────────── */
 .grid-wrap { overflow-x: auto; margin-top: 8px; -webkit-overflow-scrolling: touch; }
 .grid-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 520px; }
 .grid-table thead th {
@@ -263,7 +254,6 @@ body {
   background: var(--focus);
 }
 
-/* ─── Inputs ───────────────────────────── */
 input[type="text"], textarea {
   width: 100%;
   padding: 10px 14px;
@@ -280,7 +270,6 @@ input[type="text"], textarea {
 input[type="text"]:focus, textarea:focus { border-color: var(--focus); }
 textarea { resize: vertical; min-height: 72px; }
 
-/* ─── Scenario ─────────────────────────── */
 .scenario-box {
   background: var(--scenario-bg);
   border: 2px solid var(--scenario-border);
@@ -299,7 +288,52 @@ textarea { resize: vertical; min-height: 72px; }
   color: var(--ink);
 }
 
-/* ─── Buttons ──────────────────────────── */
+/* ─── Consent ──────────────────────────── */
+.consent-block {
+  margin-top: 32px;
+  padding: 20px 22px;
+  background: var(--primary-faint);
+  border: 1.5px solid var(--primary-light);
+  border-radius: var(--radius);
+}
+.consent-heading {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+.consent-text {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+.consent-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.consent-check .check-box { margin-top: 3px; }
+.consent-check.selected .check-box {
+  border-color: var(--focus);
+  background: var(--focus);
+}
+.consent-error {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--error);
+  font-weight: 600;
+  display: none;
+}
+.consent-error.visible { display: block; }
+
 .nav-row {
   display: flex;
   justify-content: space-between;
@@ -335,7 +369,6 @@ textarea { resize: vertical; min-height: 72px; }
 }
 .btn-submit:hover { background: #b35e24; }
 
-/* ─── Thank You ────────────────────────── */
 .thankyou {
   min-height: 70vh;
   display: flex;
@@ -370,7 +403,6 @@ textarea { resize: vertical; min-height: 72px; }
   line-height: 1.6;
 }
 
-/* ─── Setup notice ─────────────────────── */
 .setup-banner {
   background: var(--accent-light);
   border: 1.5px solid var(--accent);
@@ -388,7 +420,6 @@ textarea { resize: vertical; min-height: 72px; }
   font-size: 12px;
 }
 
-/* ─── Responsive ───────────────────────── */
 @media (max-width: 480px) {
   .card-body { padding: 18px 16px 24px; }
   .survey-header h1 { font-size: 19px; }
@@ -409,7 +440,7 @@ textarea { resize: vertical; min-height: 72px; }
 // ══════════════════════════════════════════════════════════════════════════════
 //  CONFIGURATION — Set your Google Apps Script URL here
 // ══════════════════════════════════════════════════════════════════════════════
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTn7jjAQhw4ynVNWaDD-LM6AtZJ6jqnnS7IYXb8FU4KsRzqZZRrr6JV5lV9VXqDN3W/exec"; // Paste your deployed Apps Script URL here
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTn7jjAQhw4ynVNWaDD-LM6AtZJ6jqnnS7IYXb8FU4KsRzqZZRrr6JV5lV9VXqDN3W/exec";
 // ══════════════════════════════════════════════════════════════════════════════
 
 const SECTIONS = [
@@ -417,11 +448,11 @@ const SECTIONS = [
     title: "Background Information",
     questions: [
       { id:"gender", text:"Gender", type:"radio", options:["Male","Female"] },
-      { id:"city", text:"City", type:"short", placeholder:"e.g. Lahore, Karachi, Islamabad…" },
-      { id:"district", text:"District", type:"short", placeholder:"e.g. Gulberg, Clifton, F-7…" },
+      { id:"city", text:"City", type:"short", placeholder:"e.g. Lahore, Karachi, Islamabad\u2026" },
+      { id:"district", text:"District", type:"short", placeholder:"e.g. Gulberg, Clifton, F-7\u2026" },
       { id:"grades", text:"Which grades do you currently teach?", type:"checkbox", instruction:"Tick all that apply", options:["Grade 5","Grade 6","Grade 7","Grade 8","Grade 9","Grade 10"] },
-      { id:"experience", text:"How many years of mathematics teaching experience do you have?", type:"radio", options:["0–2 years","3–5 years","6–10 years","More than 10 years"] },
-      { id:"class_size", text:"What is your typical class size?", type:"radio", options:["Fewer than 20","20–30","31–40","More than 40"] },
+      { id:"experience", text:"How many years of mathematics teaching experience do you have?", type:"radio", options:["0\u20132 years","3\u20135 years","6\u201310 years","More than 10 years"] },
+      { id:"class_size", text:"What is your typical class size?", type:"radio", options:["Fewer than 20","20\u201330","31\u201340","More than 40"] },
       { id:"medium", text:"What is the medium of instruction for your mathematics classes?", type:"radio", options:["English","Urdu","Mix of both"] },
     ],
   },
@@ -429,10 +460,10 @@ const SECTIONS = [
     title: "Your Most Recent Lesson",
     preamble: "Think back to the last mathematics lesson you taught. Answer the following questions about that specific lesson.",
     questions: [
-      { id:"last_topic", text:"What topic did you teach in that lesson?", type:"short", placeholder:"e.g. Fractions, Quadratic equations…" },
-      { id:"teacher_talk", text:"Approximately what percentage of the lesson time were you (the teacher) talking?", type:"radio", options:["More than 80%","60–80%","40–60%","Less than 40%"] },
-      { id:"student_explain", text:"During that lesson, did any student explain their reasoning or method to the class?", type:"radio", options:["Yes","No","I don't recall"] },
-      { id:"students_answering", text:"How many different students answered a question during that lesson?", type:"radio", options:["0–2","3–5","6–10","More than 10"] },
+      { id:"last_topic", text:"What topic did you teach in that lesson?", type:"short", placeholder:"e.g. Fractions, Quadratic equations\u2026" },
+      { id:"teacher_talk", text:"Approximately what percentage of the lesson time were you (the teacher) talking?", type:"radio", options:["More than 80%","60\u201380%","40\u201360%","Less than 40%"] },
+      { id:"student_explain", text:"During that lesson, did any student explain their reasoning or method to the class?", type:"radio", options:["Yes","No","I don\u2019t recall"] },
+      { id:"students_answering", text:"How many different students answered a question during that lesson?", type:"radio", options:["0\u20132","3\u20135","6\u201310","More than 10"] },
       { id:"wrong_answer", text:"Did a student give an incorrect answer during that lesson? If so, what happened next?", type:"radio", options:["No wrong answers came up","I corrected it and moved on","I asked the student to explain their thinking","We discussed the error as a class"] },
     ],
   },
@@ -440,10 +471,10 @@ const SECTIONS = [
     title: "Classroom Priorities",
     preamble: "Teachers face real trade-offs every day. For each pair below, both options are perfectly valid. Choose the one closer to what you actually do most of the time.",
     questions: [
-      { id:"tradeoff_1", text:"When time is short…", type:"pair", a:"I focus on making sure students can reliably do the procedure.", b:"I focus on making sure students understand why the procedure works." },
-      { id:"tradeoff_2", text:"Regarding syllabus coverage…", type:"pair", a:"I prefer to cover the full syllabus, even if some students don't fully grasp every topic.", b:"I prefer to slow down for understanding, even if some syllabus content is skipped." },
-      { id:"tradeoff_3", text:"When introducing a new topic…", type:"pair", a:"Students should first master the standard method before exploring alternatives.", b:"Students should try their own approaches before I show the standard method." },
-      { id:"tradeoff_4", text:"Regarding classroom atmosphere…", type:"pair", a:"I'd rather have a quiet, well-managed class where students work independently.", b:"I'd rather have a lively class with students discussing, even if it's sometimes noisy." },
+      { id:"tradeoff_1", text:"When time is short\u2026", type:"pair", a:"I focus on making sure students can reliably do the procedure.", b:"I focus on making sure students understand why the procedure works." },
+      { id:"tradeoff_2", text:"Regarding syllabus coverage\u2026", type:"pair", a:"I prefer to cover the full syllabus, even if some students don\u2019t fully grasp every topic.", b:"I prefer to slow down for understanding, even if some syllabus content is skipped." },
+      { id:"tradeoff_3", text:"When introducing a new topic\u2026", type:"pair", a:"Students should first master the standard method before exploring alternatives.", b:"Students should try their own approaches before I show the standard method." },
+      { id:"tradeoff_4", text:"Regarding classroom atmosphere\u2026", type:"pair", a:"I\u2019d rather have a quiet, well-managed class where students work independently.", b:"I\u2019d rather have a lively class with students discussing, even if it\u2019s sometimes noisy." },
     ],
   },
   {
@@ -499,6 +530,7 @@ const SECTIONS = [
       { id:"challenges", text:"What are the biggest challenges you face in teaching mathematics?", type:"checkbox", instruction:"Select up to 2", maxSelect:2, options:["Weak student foundations from earlier grades","Not enough time for the syllabus","Mixed ability levels in one class","Students are afraid of mathematics","Large class sizes","Lack of resources or materials","Board exam pressure","Difficulty explaining abstract concepts"] },
       { id:"observe", text:"If you could observe another teacher\u2019s maths lesson, what would you most want to learn about?", type:"long" },
       { id:"proud", text:"What is one thing you do in your teaching that you are proud of?", type:"long" },
+      { id:"_consent", type:"consent" },
     ],
   },
 ];
@@ -507,6 +539,8 @@ const SECTIONS = [
 let currentPage = 0;
 let answers = {};
 let submitted = false;
+let consentGiven = false;
+let consentError = false;
 
 function setAnswer(id, val) { answers[id] = val; }
 function getAnswer(id) { return answers[id]; }
@@ -515,85 +549,100 @@ function getAnswer(id) { return answers[id]; }
 
 function renderRadio(q) {
   const val = getAnswer(q.id) || "";
-  return `<div class="option-list">${q.options.map(o => `
-    <div class="option-item ${val===o?'selected':''}" onclick="selectRadio('${q.id}','${o.replace(/'/g,"\\'")}',this)">
-      <div class="radio-dot"></div>
-      <span>${o}</span>
-    </div>`).join('')}</div>`;
+  return '<div class="option-list">' + q.options.map(function(o) {
+    return '<div class="option-item ' + (val===o?'selected':'') + '" onclick="selectRadio(\'' + q.id + '\',\'' + o.replace(/'/g,"\\'") + '\')">' +
+      '<div class="radio-dot"></div><span>' + o + '</span></div>';
+  }).join('') + '</div>';
 }
 
 function renderCheckbox(q) {
   const val = getAnswer(q.id) || [];
   const max = q.maxSelect || 999;
-  return `<div class="option-list">${q.options.map(o => {
+  return '<div class="option-list">' + q.options.map(function(o) {
     const checked = val.includes(o);
     const disabled = !checked && val.length >= max;
-    return `<div class="option-item ${checked?'selected':''} ${disabled?'disabled':''}" onclick="toggleCheckbox('${q.id}','${o.replace(/'/g,"\\'")}',${max})">
-      <div class="check-box"></div>
-      <span>${o}</span>
-    </div>`;
-  }).join('')}</div>`;
+    return '<div class="option-item ' + (checked?'selected':'') + ' ' + (disabled?'disabled':'') + '" onclick="toggleCheckbox(\'' + q.id + '\',\'' + o.replace(/'/g,"\\'") + '\',' + max + ')">' +
+      '<div class="check-box"></div><span>' + o + '</span></div>';
+  }).join('') + '</div>';
 }
 
 function renderPair(q) {
   const val = getAnswer(q.id) || "";
-  return `<div class="pair-wrap">
-    <div class="pair-option ${val==='A'?'selected':''}" onclick="selectRadio('${q.id}','A',null);render();">
-      <div class="radio-dot"></div>
-      <span>${q.a}</span>
-    </div>
-    <div class="pair-option ${val==='B'?'selected':''}" onclick="selectRadio('${q.id}','B',null);render();">
-      <div class="radio-dot"></div>
-      <span>${q.b}</span>
-    </div>
-  </div>`;
+  return '<div class="pair-wrap">' +
+    '<div class="pair-option ' + (val==='A'?'selected':'') + '" onclick="selectRadio(\'' + q.id + '\',\'A\');render();">' +
+      '<div class="radio-dot"></div><span>' + q.a + '</span></div>' +
+    '<div class="pair-option ' + (val==='B'?'selected':'') + '" onclick="selectRadio(\'' + q.id + '\',\'B\');render();">' +
+      '<div class="radio-dot"></div><span>' + q.b + '</span></div>' +
+  '</div>';
 }
 
 function renderGrid(q) {
   const val = getAnswer(q.id) || {};
-  let html = `<div class="grid-wrap"><table class="grid-table"><thead><tr><th></th>${q.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
-  q.rows.forEach((r,ri) => {
-    html += `<tr><td>${r}</td>${q.columns.map(c => `<td><span class="grid-radio ${val[ri]===c?'selected':''}" onclick="selectGrid('${q.id}',${ri},'${c.replace(/'/g,"\\'")}')"></span></td>`).join('')}</tr>`;
+  let html = '<div class="grid-wrap"><table class="grid-table"><thead><tr><th></th>' +
+    q.columns.map(function(c){ return '<th>' + c + '</th>'; }).join('') +
+    '</tr></thead><tbody>';
+  q.rows.forEach(function(r, ri) {
+    html += '<tr><td>' + r + '</td>' +
+      q.columns.map(function(c) {
+        return '<td><span class="grid-radio ' + (val[ri]===c?'selected':'') + '" onclick="selectGrid(\'' + q.id + '\',' + ri + ',\'' + c.replace(/'/g,"\\'") + '\')"></span></td>';
+      }).join('') + '</tr>';
   });
-  html += `</tbody></table></div>`;
+  html += '</tbody></table></div>';
   return html;
 }
 
 function renderScenario(q) {
-  let html = `<div class="scenario-box"><strong>Scenario:</strong> ${q.scenario}</div>`;
-  q.parts.forEach(p => {
+  let html = '<div class="scenario-box"><strong>Scenario:</strong> ' + q.scenario + '</div>';
+  q.parts.forEach(function(p) {
     const val = getAnswer(p.id) || "";
-    html += `<div class="scenario-part">
-      <div class="scenario-part-label">${p.label}</div>
-      <textarea id="input-${p.id}" oninput="setAnswer('${p.id}',this.value)" placeholder="Write your response here…">${val}</textarea>
-    </div>`;
+    html += '<div class="scenario-part">' +
+      '<div class="scenario-part-label">' + p.label + '</div>' +
+      '<textarea id="input-' + p.id + '" oninput="setAnswer(\'' + p.id + '\',this.value)" placeholder="Write your response here\u2026">' + val + '</textarea>' +
+    '</div>';
   });
   return html;
 }
 
+function renderConsent() {
+  return '<div class="consent-block">' +
+    '<div class="consent-heading">Consent for Research Use</div>' +
+    '<div class="consent-text">' +
+      'Your responses are anonymous and will be used solely for educational research purposes aimed at understanding and improving mathematics teaching practices. ' +
+      'No personally identifiable information will be collected or shared. By ticking the box below, you give your voluntary consent for your anonymised responses to be used in academic research and publications.' +
+    '</div>' +
+    '<div class="consent-check ' + (consentGiven?'selected':'') + '" onclick="toggleConsent()">' +
+      '<div class="check-box"></div>' +
+      '<span>I consent to my anonymised responses being used for educational research purposes.</span>' +
+    '</div>' +
+    '<div class="consent-error ' + (consentError?'visible':'') + '">Please provide your consent before submitting.</div>' +
+  '</div>';
+}
+
 function renderQuestion(q) {
+  if (q.type === 'consent') return renderConsent();
+
   let html = '';
   if (q.type !== 'scenario' && q.type !== 'grid' && q.text) {
-    html += `<div class="q-label">${q.text}</div>`;
+    html += '<div class="q-label">' + q.text + '</div>';
   }
-  if (q.instruction) html += `<div class="q-instruction">${q.instruction}</div>`;
+  if (q.instruction) html += '<div class="q-instruction">' + q.instruction + '</div>';
 
   switch(q.type) {
     case 'radio': html += renderRadio(q); break;
     case 'checkbox': html += renderCheckbox(q); break;
     case 'short':
-      const sv = getAnswer(q.id) || "";
-      html += `<input type="text" id="input-${q.id}" value="${sv.replace(/"/g,'&quot;')}" oninput="setAnswer('${q.id}',this.value)" placeholder="${q.placeholder||''}">`;
+      var sv = getAnswer(q.id) || "";
+      html += '<input type="text" id="input-' + q.id + '" value="' + sv.replace(/"/g,'&quot;') + '" oninput="setAnswer(\'' + q.id + '\',this.value)" placeholder="' + (q.placeholder||'') + '">';
       break;
     case 'long':
-      const lv = getAnswer(q.id) || "";
-      html += `<textarea id="input-${q.id}" oninput="setAnswer('${q.id}',this.value)" placeholder="Write your response here…">${lv}</textarea>`;
+      var lv = getAnswer(q.id) || "";
+      html += '<textarea id="input-' + q.id + '" oninput="setAnswer(\'' + q.id + '\',this.value)" placeholder="Write your response here\u2026">' + lv + '</textarea>';
       break;
     case 'pair': html += renderPair(q); break;
     case 'grid': html += renderGrid(q); break;
     case 'scenario': html += renderScenario(q); break;
   }
-  return `<div class="question-block">${html}</div>`;
+  return '<div class="question-block">' + html + '</div>';
 }
 
 // ─── Interaction handlers ───────────────────────────────────────────────────
@@ -604,21 +653,27 @@ window.selectRadio = function(id, val) {
 };
 
 window.toggleCheckbox = function(id, val, max) {
-  let arr = getAnswer(id) || [];
+  var arr = getAnswer(id) || [];
   if (arr.includes(val)) {
-    arr = arr.filter(v => v !== val);
+    arr = arr.filter(function(v) { return v !== val; });
   } else {
     if (arr.length >= max) return;
-    arr = [...arr, val];
+    arr = arr.concat([val]);
   }
   setAnswer(id, arr);
   render();
 };
 
 window.selectGrid = function(id, rowIdx, col) {
-  const val = getAnswer(id) || {};
+  var val = getAnswer(id) || {};
   val[rowIdx] = col;
-  setAnswer(id, {...val});
+  setAnswer(id, Object.assign({}, val));
+  render();
+};
+
+window.toggleConsent = function() {
+  consentGiven = !consentGiven;
+  consentError = false;
   render();
 };
 
@@ -627,14 +682,15 @@ window.setAnswer = setAnswer;
 // ─── Submit ─────────────────────────────────────────────────────────────────
 
 function flattenAnswers() {
-  const flat = { timestamp: new Date().toISOString() };
-  SECTIONS.forEach(sec => {
-    sec.questions.forEach(q => {
+  var flat = { timestamp: new Date().toISOString(), consent: consentGiven ? "Yes" : "No" };
+  SECTIONS.forEach(function(sec) {
+    sec.questions.forEach(function(q) {
+      if (q.type === 'consent') return;
       if (q.type === 'scenario') {
-        q.parts.forEach(p => { flat[p.id] = getAnswer(p.id) || ""; });
+        q.parts.forEach(function(p) { flat[p.id] = getAnswer(p.id) || ""; });
       } else if (q.type === 'grid') {
-        const val = getAnswer(q.id) || {};
-        q.rows.forEach((r, i) => {
+        var val = getAnswer(q.id) || {};
+        q.rows.forEach(function(r, i) {
           flat[q.id + '_' + i] = val[i] || "";
         });
       } else if (q.type === 'checkbox') {
@@ -648,10 +704,17 @@ function flattenAnswers() {
 }
 
 async function submitForm() {
-  const data = flattenAnswers();
+  if (!consentGiven) {
+    consentError = true;
+    render();
+    var el = document.querySelector('.consent-block');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  var data = flattenAnswers();
 
   if (!GOOGLE_SCRIPT_URL) {
-    // Demo mode
     console.log("Survey data:", JSON.stringify(data, null, 2));
     submitted = true;
     render();
@@ -659,8 +722,8 @@ async function submitForm() {
   }
 
   try {
-    document.querySelector('.btn-submit').textContent = 'Submitting…';
-    document.querySelector('.btn-submit').style.opacity = '0.6';
+    var btn = document.querySelector('.btn-submit');
+    if (btn) { btn.textContent = 'Submitting\u2026'; btn.style.opacity = '0.6'; }
 
     await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
@@ -674,66 +737,64 @@ async function submitForm() {
   } catch(err) {
     alert('There was an error submitting. Please try again.');
     console.error(err);
-    document.querySelector('.btn-submit').textContent = 'Submit';
-    document.querySelector('.btn-submit').style.opacity = '1';
+    var btn2 = document.querySelector('.btn-submit');
+    if (btn2) { btn2.textContent = 'Submit'; btn2.style.opacity = '1'; }
   }
 }
 
 // ─── Main render ────────────────────────────────────────────────────────────
 
 function render() {
-  const app = document.getElementById('app');
+  var app = document.getElementById('app');
 
   if (submitted) {
-    app.innerHTML = `<div class="thankyou"><div class="thankyou-card">
-      <div class="thankyou-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <h2>Thank You!</h2>
-      <p>Your responses have been recorded. Your reflections are valued and will help us understand mathematics teaching practices across different classrooms.</p>
-    </div></div>`;
+    app.innerHTML = '<div class="thankyou"><div class="thankyou-card">' +
+      '<div class="thankyou-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+      '<h2>Thank You!</h2>' +
+      '<p>Your responses have been recorded. Your reflections are valued and will help us understand mathematics teaching practices across different classrooms.</p>' +
+    '</div></div>';
     return;
   }
 
-  const sec = SECTIONS[currentPage];
-  const total = SECTIONS.length;
-  const pct = ((currentPage + 1) / total * 100).toFixed(0);
+  var sec = SECTIONS[currentPage];
+  var total = SECTIONS.length;
+  var pct = ((currentPage + 1) / total * 100).toFixed(0);
 
-  let setupNote = '';
+  var setupNote = '';
   if (!GOOGLE_SCRIPT_URL) {
-    setupNote = `<div class="setup-banner">
-      <strong>Setup needed:</strong> To collect real responses, deploy the Google Apps Script (see instructions in the HTML file) and paste the URL into <code>GOOGLE_SCRIPT_URL</code> at the top of the script. Currently running in demo mode — responses log to console.
-    </div>`;
+    setupNote = '<div class="setup-banner">' +
+      '<strong>Setup needed:</strong> To collect real responses, deploy the Google Apps Script (see instructions in the HTML file) and paste the URL into <code>GOOGLE_SCRIPT_URL</code> at the top of the script. Currently running in demo mode.' +
+    '</div>';
   }
 
-  let questionsHtml = sec.questions.map(q => renderQuestion(q)).join('');
+  var questionsHtml = sec.questions.map(function(q) { return renderQuestion(q); }).join('');
 
-  let navHtml = `<div class="nav-row">`;
+  var navHtml = '<div class="nav-row">';
   if (currentPage > 0) {
-    navHtml += `<button class="btn btn-outline" onclick="goPage(${currentPage-1})">\u2190 Back</button>`;
+    navHtml += '<button class="btn btn-outline" onclick="goPage(' + (currentPage-1) + ')">\u2190 Back</button>';
   } else {
-    navHtml += `<div></div>`;
+    navHtml += '<div></div>';
   }
   if (currentPage < total - 1) {
-    navHtml += `<button class="btn btn-primary" onclick="goPage(${currentPage+1})">Next \u2192</button>`;
+    navHtml += '<button class="btn btn-primary" onclick="goPage(' + (currentPage+1) + ')">Next \u2192</button>';
   } else {
-    navHtml += `<button class="btn btn-submit" onclick="submitForm()">Submit</button>`;
+    navHtml += '<button class="btn btn-submit" onclick="submitForm()">Submit</button>';
   }
-  navHtml += `</div>`;
+  navHtml += '</div>';
 
-  app.innerHTML = `
-    ${setupNote}
-    <div class="progress-wrap">
-      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
-      <span class="progress-label">${currentPage+1} / ${total}</span>
-    </div>
-    <div class="card">
-      <div class="card-header"><h2>${sec.title}</h2></div>
-      <div class="card-body">
-        ${sec.preamble ? `<div class="preamble">${sec.preamble}</div>` : ''}
-        ${questionsHtml}
-      </div>
-    </div>
-    ${navHtml}
-  `;
+  app.innerHTML = setupNote +
+    '<div class="progress-wrap">' +
+      '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+      '<span class="progress-label">' + (currentPage+1) + ' / ' + total + '</span>' +
+    '</div>' +
+    '<div class="card">' +
+      '<div class="card-header"><h2>' + sec.title + '</h2></div>' +
+      '<div class="card-body">' +
+        (sec.preamble ? '<div class="preamble">' + sec.preamble + '</div>' : '') +
+        questionsHtml +
+      '</div>' +
+    '</div>' +
+    navHtml;
 }
 
 window.goPage = function(p) {
