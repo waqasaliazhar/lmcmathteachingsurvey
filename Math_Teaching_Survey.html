@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics Teaching Practice Survey</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1a2332;
+  --ink-soft: #4a5568;
+  --ink-faint: #8896a7;
+  --surface: #f6f4f0;
+  --card: #ffffff;
+  --primary: #1a5276;
+  --primary-light: #d4e6f1;
+  --primary-faint: #eef5fa;
+  --accent: #c96b2b;
+  --accent-light: #fdf0e4;
+  --border: #d8dce2;
+  --input-border: #bcc5d0;
+  --focus: #2471a3;
+  --scenario-bg: #fef9e7;
+  --scenario-border: #e8c83a;
+  --selected-bg: #e8f0f7;
+  --success: #1e8449;
+  --error: #c0392b;
+  --radius: 10px;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 20px rgba(0,0,0,.07);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.10);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Header ───────────────────────────── */
+.survey-header {
+  background: var(--primary);
+  padding: 32px 20px 26px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.survey-header::before {
+  content: '';
+  position: absolute;
+  top: -40%; left: -20%;
+  width: 140%; height: 180%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 80%, rgba(255,255,255,.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.survey-header h1 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  letter-spacing: .2px;
+}
+.survey-header p {
+  font-size: 13px;
+  color: rgba(255,255,255,.65);
+  margin-top: 6px;
+  position: relative;
+}
+
+/* ─── Container ────────────────────────── */
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+}
+
+/* ─── Progress ─────────────────────────── */
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.progress-track {
+  flex: 1;
+  height: 5px;
+  background: var(--primary-light);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 3px;
+  transition: width .5s cubic-bezier(.4,0,.2,1);
+}
+.progress-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+/* ─── Card ─────────────────────────────── */
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  animation: fadeUp .4s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card-header {
+  background: var(--primary);
+  padding: 14px 24px;
+}
+.card-header h2 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+.card-body {
+  padding: 22px 24px 28px;
+}
+
+/* ─── Preamble ─────────────────────────── */
+.preamble {
+  background: var(--primary-faint);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: 22px;
+}
+
+/* ─── Questions ────────────────────────── */
+.question-block { margin-bottom: 28px; }
+.question-block:last-child { margin-bottom: 0; }
+.q-label {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.q-instruction {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+/* ─── Radio / Checkbox ─────────────────── */
+.option-list { display: flex; flex-direction: column; gap: 7px; margin-top: 6px; }
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all .15s;
+  font-size: 14px;
+  user-select: none;
+}
+.option-item:hover { background: var(--primary-faint); }
+.option-item.selected {
+  background: var(--selected-bg);
+  border-color: var(--focus);
+}
+.option-item.disabled { opacity: .4; cursor: not-allowed; }
+.radio-dot, .check-box {
+  width: 18px; height: 18px;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all .15s;
+}
+.radio-dot { border-radius: 50%; }
+.check-box { border-radius: 4px; }
+.selected .radio-dot { border-color: var(--focus); }
+.selected .radio-dot::after {
+  content: '';
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--focus);
+}
+.selected .check-box {
+  border-color: var(--focus);
+  background: var(--focus);
+}
+.selected .check-box::after {
+  content: '';
+  width: 10px; height: 8px;
+  background: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* ─── Forced Pair ──────────────────────── */
+.pair-wrap { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+.pair-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px 16px;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: all .15s;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.pair-option:hover { border-color: var(--focus); background: var(--primary-faint); }
+.pair-option.selected { border-color: var(--focus); background: var(--selected-bg); }
+.pair-option .radio-dot { margin-top: 2px; }
+
+/* ─── Grid ─────────────────────────────── */
+.grid-wrap { overflow-x: auto; margin-top: 8px; -webkit-overflow-scrolling: touch; }
+.grid-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 520px; }
+.grid-table thead th {
+  text-align: center;
+  padding: 9px 6px;
+  border-bottom: 2px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 11.5px;
+}
+.grid-table thead th:first-child { text-align: left; min-width: 180px; }
+.grid-table tbody td {
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  line-height: 1.45;
+}
+.grid-table tbody td:first-child { text-align: left; padding-left: 8px; }
+.grid-table tbody tr:nth-child(even) { background: var(--primary-faint); }
+.grid-radio {
+  width: 20px; height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all .15s;
+}
+.grid-radio:hover { border-color: var(--focus); }
+.grid-radio.selected { border-color: var(--focus); }
+.grid-radio.selected::after {
+  content: '';
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--focus);
+}
+
+/* ─── Inputs ───────────────────────────── */
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--input-border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+  transition: border-color .15s;
+  margin-top: 4px;
+}
+input[type="text"]:focus, textarea:focus { border-color: var(--focus); }
+textarea { resize: vertical; min-height: 72px; }
+
+/* ─── Scenario ─────────────────────────── */
+.scenario-box {
+  background: var(--scenario-bg);
+  border: 2px solid var(--scenario-border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin: 8px 0 16px;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.scenario-box strong { color: var(--primary); }
+.scenario-part { margin-bottom: 14px; }
+.scenario-part-label {
+  font-weight: 600;
+  font-size: 13.5px;
+  margin-bottom: 5px;
+  color: var(--ink);
+}
+
+/* ─── Buttons ──────────────────────────── */
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  gap: 12px;
+}
+.btn {
+  padding: 12px 30px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all .2s;
+  border: none;
+}
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+.btn-outline:hover { background: var(--primary-faint); }
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(26,82,118,.25);
+}
+.btn-primary:hover { background: #164466; }
+.btn-submit {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(201,107,43,.25);
+}
+.btn-submit:hover { background: #b35e24; }
+
+/* ─── Thank You ────────────────────────── */
+.thankyou {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.thankyou-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 48px 36px;
+  max-width: 440px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  animation: fadeUp .5s ease both;
+}
+.thankyou-icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--success);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+}
+.thankyou-card h2 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--primary);
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.thankyou-card p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* ─── Setup notice ─────────────────────── */
+.setup-banner {
+  background: var(--accent-light);
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--accent);
+}
+.setup-banner code {
+  background: rgba(0,0,0,.06);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+/* ─── Responsive ───────────────────────── */
+@media (max-width: 480px) {
+  .card-body { padding: 18px 16px 24px; }
+  .survey-header h1 { font-size: 19px; }
+  .btn { padding: 11px 22px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="survey-header">
+  <h1>Mathematics Teaching Practice Survey</h1>
+  <p>Grades 5–10 &nbsp;·&nbsp; Confidential</p>
+</div>
+
+<div class="container" id="app"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════════
+//  CONFIGURATION — Set your Google Apps Script URL here
+// ══════════════════════════════════════════════════════════════════════════════
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTn7jjAQhw4ynVNWaDD-LM6AtZJ6jqnnS7IYXb8FU4KsRzqZZRrr6JV5lV9VXqDN3W/exec"; // Paste your deployed Apps Script URL here
+// ══════════════════════════════════════════════════════════════════════════════
+
+const SECTIONS = [
+  {
+    title: "Background Information",
+    questions: [
+      { id:"gender", text:"Gender", type:"radio", options:["Male","Female"] },
+      { id:"city", text:"City", type:"short", placeholder:"e.g. Lahore, Karachi, Islamabad…" },
+      { id:"district", text:"District", type:"short", placeholder:"e.g. Gulberg, Clifton, F-7…" },
+      { id:"grades", text:"Which grades do you currently teach?", type:"checkbox", instruction:"Tick all that apply", options:["Grade 5","Grade 6","Grade 7","Grade 8","Grade 9","Grade 10"] },
+      { id:"experience", text:"How many years of mathematics teaching experience do you have?", type:"radio", options:["0–2 years","3–5 years","6–10 years","More than 10 years"] },
+      { id:"class_size", text:"What is your typical class size?", type:"radio", options:["Fewer than 20","20–30","31–40","More than 40"] },
+      { id:"medium", text:"What is the medium of instruction for your mathematics classes?", type:"radio", options:["English","Urdu","Mix of both"] },
+    ],
+  },
+  {
+    title: "Your Most Recent Lesson",
+    preamble: "Think back to the last mathematics lesson you taught. Answer the following questions about that specific lesson.",
+    questions: [
+      { id:"last_topic", text:"What topic did you teach in that lesson?", type:"short", placeholder:"e.g. Fractions, Quadratic equations…" },
+      { id:"teacher_talk", text:"Approximately what percentage of the lesson time were you (the teacher) talking?", type:"radio", options:["More than 80%","60–80%","40–60%","Less than 40%"] },
+      { id:"student_explain", text:"During that lesson, did any student explain their reasoning or method to the class?", type:"radio", options:["Yes","No","I don't recall"] },
+      { id:"students_answering", text:"How many different students answered a question during that lesson?", type:"radio", options:["0–2","3–5","6–10","More than 10"] },
+      { id:"wrong_answer", text:"Did a student give an incorrect answer during that lesson? If so, what happened next?", type:"radio", options:["No wrong answers came up","I corrected it and moved on","I asked the student to explain their thinking","We discussed the error as a class"] },
+    ],
+  },
+  {
+    title: "Classroom Priorities",
+    preamble: "Teachers face real trade-offs every day. For each pair below, both options are perfectly valid. Choose the one closer to what you actually do most of the time.",
+    questions: [
+      { id:"tradeoff_1", text:"When time is short…", type:"pair", a:"I focus on making sure students can reliably do the procedure.", b:"I focus on making sure students understand why the procedure works." },
+      { id:"tradeoff_2", text:"Regarding syllabus coverage…", type:"pair", a:"I prefer to cover the full syllabus, even if some students don't fully grasp every topic.", b:"I prefer to slow down for understanding, even if some syllabus content is skipped." },
+      { id:"tradeoff_3", text:"When introducing a new topic…", type:"pair", a:"Students should first master the standard method before exploring alternatives.", b:"Students should try their own approaches before I show the standard method." },
+      { id:"tradeoff_4", text:"Regarding classroom atmosphere…", type:"pair", a:"I'd rather have a quiet, well-managed class where students work independently.", b:"I'd rather have a lively class with students discussing, even if it's sometimes noisy." },
+    ],
+  },
+  {
+    title: "Teaching Frequency",
+    preamble: "How often does each of the following happen in your classes? Think about what happens most weeks.",
+    questions: [
+      {
+        id:"freq_grid", type:"grid",
+        rows: [
+          "Students copy notes from the board.",
+          "Students work on a problem before I explain the method.",
+          "I wait more than 5 seconds after asking a question.",
+          "A student asks me \u201CWhy?\u201D or \u201CWhat if?\u201D",
+          "Students present their solutions to the class.",
+          "I use real-life or contextual examples.",
+        ],
+        columns: ["Almost never","A few times a term","Weekly","Most lessons"],
+      },
+    ],
+  },
+  {
+    title: "Classroom Scenarios",
+    preamble: "Read each scenario and write what you would actually say or do. There are no right or wrong answers \u2014 we are interested in your natural teaching instincts.",
+    questions: [
+      {
+        id:"scenario_a", type:"scenario",
+        scenario: "You are teaching fractions to a Grade 6 class. A student raises their hand and says: \u201C1/4 is greater than 1/3, because 4 is greater than 3.\u201D Several other students nod in agreement.",
+        parts: [
+          { id:"scenario_a1", label:"(a) What would you say or do next, in the moment?" },
+          { id:"scenario_a2", label:"(b) What does this error tell you about the student\u2019s thinking?" },
+        ],
+      },
+      {
+        id:"scenario_b", type:"scenario",
+        scenario: "You are teaching Grade 8 algebra. You write: \u201CSolve for x: 2(x + 3) = 14.\u201D A student quickly answers \u201Cx = 4\u201D but when asked to show their work, they say: \u201CI just knew it. I put numbers until it worked.\u201D",
+        parts: [
+          { id:"scenario_b1", label:"(a) How would you respond to this student?" },
+          { id:"scenario_b2", label:"(b) Would you give full marks on a test for this answer? Why or why not?" },
+        ],
+      },
+      {
+        id:"scenario_c", type:"scenario",
+        scenario: "You are introducing negative numbers to Grade 7. You ask: \u201CWhat is 3 \u2212 5?\u201D One student says \u201CYou can\u2019t do that.\u201D Another says \u201CIt\u2019s \u22122.\u201D",
+        parts: [
+          { id:"scenario_c1", label:"How do you handle this disagreement between the two students?" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Challenges & Growth",
+    questions: [
+      { id:"challenges", text:"What are the biggest challenges you face in teaching mathematics?", type:"checkbox", instruction:"Select up to 2", maxSelect:2, options:["Weak student foundations from earlier grades","Not enough time for the syllabus","Mixed ability levels in one class","Students are afraid of mathematics","Large class sizes","Lack of resources or materials","Board exam pressure","Difficulty explaining abstract concepts"] },
+      { id:"observe", text:"If you could observe another teacher\u2019s maths lesson, what would you most want to learn about?", type:"long" },
+      { id:"proud", text:"What is one thing you do in your teaching that you are proud of?", type:"long" },
+    ],
+  },
+];
+
+// ─── State ──────────────────────────────────────────────────────────────────
+let currentPage = 0;
+let answers = {};
+let submitted = false;
+
+function setAnswer(id, val) { answers[id] = val; }
+function getAnswer(id) { return answers[id]; }
+
+// ─── Render helpers ─────────────────────────────────────────────────────────
+
+function renderRadio(q) {
+  const val = getAnswer(q.id) || "";
+  return `<div class="option-list">${q.options.map(o => `
+    <div class="option-item ${val===o?'selected':''}" onclick="selectRadio('${q.id}','${o.replace(/'/g,"\\'")}',this)">
+      <div class="radio-dot"></div>
+      <span>${o}</span>
+    </div>`).join('')}</div>`;
+}
+
+function renderCheckbox(q) {
+  const val = getAnswer(q.id) || [];
+  const max = q.maxSelect || 999;
+  return `<div class="option-list">${q.options.map(o => {
+    const checked = val.includes(o);
+    const disabled = !checked && val.length >= max;
+    return `<div class="option-item ${checked?'selected':''} ${disabled?'disabled':''}" onclick="toggleCheckbox('${q.id}','${o.replace(/'/g,"\\'")}',${max})">
+      <div class="check-box"></div>
+      <span>${o}</span>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function renderPair(q) {
+  const val = getAnswer(q.id) || "";
+  return `<div class="pair-wrap">
+    <div class="pair-option ${val==='A'?'selected':''}" onclick="selectRadio('${q.id}','A',null);render();">
+      <div class="radio-dot"></div>
+      <span>${q.a}</span>
+    </div>
+    <div class="pair-option ${val==='B'?'selected':''}" onclick="selectRadio('${q.id}','B',null);render();">
+      <div class="radio-dot"></div>
+      <span>${q.b}</span>
+    </div>
+  </div>`;
+}
+
+function renderGrid(q) {
+  const val = getAnswer(q.id) || {};
+  let html = `<div class="grid-wrap"><table class="grid-table"><thead><tr><th></th>${q.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+  q.rows.forEach((r,ri) => {
+    html += `<tr><td>${r}</td>${q.columns.map(c => `<td><span class="grid-radio ${val[ri]===c?'selected':''}" onclick="selectGrid('${q.id}',${ri},'${c.replace(/'/g,"\\'")}')"></span></td>`).join('')}</tr>`;
+  });
+  html += `</tbody></table></div>`;
+  return html;
+}
+
+function renderScenario(q) {
+  let html = `<div class="scenario-box"><strong>Scenario:</strong> ${q.scenario}</div>`;
+  q.parts.forEach(p => {
+    const val = getAnswer(p.id) || "";
+    html += `<div class="scenario-part">
+      <div class="scenario-part-label">${p.label}</div>
+      <textarea id="input-${p.id}" oninput="setAnswer('${p.id}',this.value)" placeholder="Write your response here…">${val}</textarea>
+    </div>`;
+  });
+  return html;
+}
+
+function renderQuestion(q) {
+  let html = '';
+  if (q.type !== 'scenario' && q.type !== 'grid' && q.text) {
+    html += `<div class="q-label">${q.text}</div>`;
+  }
+  if (q.instruction) html += `<div class="q-instruction">${q.instruction}</div>`;
+
+  switch(q.type) {
+    case 'radio': html += renderRadio(q); break;
+    case 'checkbox': html += renderCheckbox(q); break;
+    case 'short':
+      const sv = getAnswer(q.id) || "";
+      html += `<input type="text" id="input-${q.id}" value="${sv.replace(/"/g,'&quot;')}" oninput="setAnswer('${q.id}',this.value)" placeholder="${q.placeholder||''}">`;
+      break;
+    case 'long':
+      const lv = getAnswer(q.id) || "";
+      html += `<textarea id="input-${q.id}" oninput="setAnswer('${q.id}',this.value)" placeholder="Write your response here…">${lv}</textarea>`;
+      break;
+    case 'pair': html += renderPair(q); break;
+    case 'grid': html += renderGrid(q); break;
+    case 'scenario': html += renderScenario(q); break;
+  }
+  return `<div class="question-block">${html}</div>`;
+}
+
+// ─── Interaction handlers ───────────────────────────────────────────────────
+
+window.selectRadio = function(id, val) {
+  setAnswer(id, val);
+  render();
+};
+
+window.toggleCheckbox = function(id, val, max) {
+  let arr = getAnswer(id) || [];
+  if (arr.includes(val)) {
+    arr = arr.filter(v => v !== val);
+  } else {
+    if (arr.length >= max) return;
+    arr = [...arr, val];
+  }
+  setAnswer(id, arr);
+  render();
+};
+
+window.selectGrid = function(id, rowIdx, col) {
+  const val = getAnswer(id) || {};
+  val[rowIdx] = col;
+  setAnswer(id, {...val});
+  render();
+};
+
+window.setAnswer = setAnswer;
+
+// ─── Submit ─────────────────────────────────────────────────────────────────
+
+function flattenAnswers() {
+  const flat = { timestamp: new Date().toISOString() };
+  SECTIONS.forEach(sec => {
+    sec.questions.forEach(q => {
+      if (q.type === 'scenario') {
+        q.parts.forEach(p => { flat[p.id] = getAnswer(p.id) || ""; });
+      } else if (q.type === 'grid') {
+        const val = getAnswer(q.id) || {};
+        q.rows.forEach((r, i) => {
+          flat[q.id + '_' + i] = val[i] || "";
+        });
+      } else if (q.type === 'checkbox') {
+        flat[q.id] = (getAnswer(q.id) || []).join("; ");
+      } else {
+        flat[q.id] = getAnswer(q.id) || "";
+      }
+    });
+  });
+  return flat;
+}
+
+async function submitForm() {
+  const data = flattenAnswers();
+
+  if (!GOOGLE_SCRIPT_URL) {
+    // Demo mode
+    console.log("Survey data:", JSON.stringify(data, null, 2));
+    submitted = true;
+    render();
+    return;
+  }
+
+  try {
+    document.querySelector('.btn-submit').textContent = 'Submitting…';
+    document.querySelector('.btn-submit').style.opacity = '0.6';
+
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    submitted = true;
+    render();
+  } catch(err) {
+    alert('There was an error submitting. Please try again.');
+    console.error(err);
+    document.querySelector('.btn-submit').textContent = 'Submit';
+    document.querySelector('.btn-submit').style.opacity = '1';
+  }
+}
+
+// ─── Main render ────────────────────────────────────────────────────────────
+
+function render() {
+  const app = document.getElementById('app');
+
+  if (submitted) {
+    app.innerHTML = `<div class="thankyou"><div class="thankyou-card">
+      <div class="thankyou-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2>Thank You!</h2>
+      <p>Your responses have been recorded. Your reflections are valued and will help us understand mathematics teaching practices across different classrooms.</p>
+    </div></div>`;
+    return;
+  }
+
+  const sec = SECTIONS[currentPage];
+  const total = SECTIONS.length;
+  const pct = ((currentPage + 1) / total * 100).toFixed(0);
+
+  let setupNote = '';
+  if (!GOOGLE_SCRIPT_URL) {
+    setupNote = `<div class="setup-banner">
+      <strong>Setup needed:</strong> To collect real responses, deploy the Google Apps Script (see instructions in the HTML file) and paste the URL into <code>GOOGLE_SCRIPT_URL</code> at the top of the script. Currently running in demo mode — responses log to console.
+    </div>`;
+  }
+
+  let questionsHtml = sec.questions.map(q => renderQuestion(q)).join('');
+
+  let navHtml = `<div class="nav-row">`;
+  if (currentPage > 0) {
+    navHtml += `<button class="btn btn-outline" onclick="goPage(${currentPage-1})">\u2190 Back</button>`;
+  } else {
+    navHtml += `<div></div>`;
+  }
+  if (currentPage < total - 1) {
+    navHtml += `<button class="btn btn-primary" onclick="goPage(${currentPage+1})">Next \u2192</button>`;
+  } else {
+    navHtml += `<button class="btn btn-submit" onclick="submitForm()">Submit</button>`;
+  }
+  navHtml += `</div>`;
+
+  app.innerHTML = `
+    ${setupNote}
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <span class="progress-label">${currentPage+1} / ${total}</span>
+    </div>
+    <div class="card">
+      <div class="card-header"><h2>${sec.title}</h2></div>
+      <div class="card-body">
+        ${sec.preamble ? `<div class="preamble">${sec.preamble}</div>` : ''}
+        ${questionsHtml}
+      </div>
+    </div>
+    ${navHtml}
+  `;
+}
+
+window.goPage = function(p) {
+  currentPage = p;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// Boot
+render();
+</script>
+
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║   HOW TO CONNECT THIS FORM TO GOOGLE SHEETS                               ║
+║                                                                            ║
+║   1. Go to https://sheets.google.com and create a new spreadsheet          ║
+║      Name it "Math Teaching Survey Responses"                              ║
+║                                                                            ║
+║   2. Go to Extensions → Apps Script                                        ║
+║                                                                            ║
+║   3. Delete all existing code and paste this:                              ║
+║                                                                            ║
+║      function doPost(e) {                                                  ║
+║        var sheet = SpreadsheetApp.getActiveSpreadsheet()                   ║
+║                      .getActiveSheet();                                    ║
+║        var data = JSON.parse(e.postData.contents);                         ║
+║                                                                            ║
+║        // On first submission, create headers                              ║
+║        if (sheet.getLastRow() === 0) {                                     ║
+║          sheet.appendRow(Object.keys(data));                               ║
+║        }                                                                   ║
+║                                                                            ║
+║        // Append the response                                              ║
+║        var headers = sheet.getRange(1, 1, 1,                               ║
+║                        sheet.getLastColumn()).getValues()[0];               ║
+║        var row = headers.map(function(h) {                                 ║
+║          return data[h] || "";                                             ║
+║        });                                                                 ║
+║        sheet.appendRow(row);                                               ║
+║                                                                            ║
+║        return ContentService.createTextOutput(                             ║
+║          JSON.stringify({status: "ok"})                                    ║
+║        ).setMimeType(ContentService.MimeType.JSON);                        ║
+║      }                                                                     ║
+║                                                                            ║
+║   4. Click Deploy → New deployment                                         ║
+║      - Type: Web app                                                       ║
+║      - Execute as: Me                                                      ║
+║      - Who has access: Anyone                                              ║
+║      - Click Deploy                                                        ║
+║                                                                            ║
+║   5. Copy the Web app URL and paste it into the                            ║
+║      GOOGLE_SCRIPT_URL variable at the top of the <script> tag             ║
+║      in this file.                                                         ║
+║                                                                            ║
+║   6. Host this HTML file anywhere:                                         ║
+║      - GitHub Pages (free)                                                 ║
+║      - Netlify Drop (drag & drop, free)                                    ║
+║      - Any web server                                                      ║
+║      - Or just open it locally and share via ngrok                         ║
+║                                                                            ║
+║   That's it! Every submission will appear as a new row                     ║
+║   in your Google Sheet.                                                    ║
+║                                                                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+
+</body>
+</html>
