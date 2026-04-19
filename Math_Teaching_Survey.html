@@ -440,7 +440,7 @@ textarea { resize: vertical; min-height: 72px; }
 // ══════════════════════════════════════════════════════════════════════════════
 //  CONFIGURATION — Set your Google Apps Script URL here
 // ══════════════════════════════════════════════════════════════════════════════
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzehDpa5DYDAqLqV9sEexbh8ECL85LQsVDn_9h8msWQrybQPkXAFtqqq3h3R1Pyj9BvUw/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOlSddLr7n_Era67WF_8WxhVDVUJsAjsL3vshaZEDcSFxMAbOfffOgECYu7UgU1FjeBQ/exec";
 // ══════════════════════════════════════════════════════════════════════════════
 
 const SECTIONS = [
@@ -448,8 +448,8 @@ const SECTIONS = [
     title: "Background Information",
     questions: [
       { id:"gender", text:"Gender", type:"radio", options:["Male","Female"] },
+      { id:"province", text:"Province", type:"short", placeholder:"e.g. Punjab, Sindh, KPK\u2026" },
       { id:"city", text:"City", type:"short", placeholder:"e.g. Lahore, Karachi, Islamabad\u2026" },
-      { id:"district", text:"District", type:"short", placeholder:"e.g. Gulberg, Clifton, F-7\u2026" },
       { id:"grades", text:"Which grades do you currently teach?", type:"checkbox", instruction:"Tick all that apply", options:["Grade 5","Grade 6","Grade 7","Grade 8","Grade 9","Grade 10"] },
       { id:"experience", text:"How many years of mathematics teaching experience do you have?", type:"radio", options:["0\u20132 years","3\u20135 years","6\u201310 years","More than 10 years"] },
       { id:"class_size", text:"What is your typical class size?", type:"radio", options:["Fewer than 20","20\u201330","31\u201340","More than 40"] },
